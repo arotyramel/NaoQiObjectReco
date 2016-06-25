@@ -161,13 +161,24 @@ def maybe_download_and_extract():
     print('Succesfully downloaded', filename, statinfo.st_size, 'bytes.')
   tarfile.open(filepath, 'r:gz').extractall(dest_directory)
 
-def init():
-  maybe_download_and_extract()
-  create_graph()
-
+node_lookup = None
 initialised = False
 
+def init():
+  global node_lookup, initialised
+  maybe_download_and_extract()
+  create_graph()
+  node_lookup = NodeLookup()
+  initialised = True
+
+def all_labels():
+  global node_lookup
+  if (not initialised):
+    init()
+  return node_lookup.node_lookup
+
 def run_inference_on_image(image):
+  global node_lookup
   """Runs inference on an image.
 
   Args:
@@ -208,7 +219,7 @@ def run_inference_on_image(image):
     sys.stdout = _stdout
 
     # Creates node ID --> English string lookup.
-    node_lookup = NodeLookup()
+    #node_lookup = NodeLookup()
 
     top_k = predictions.argsort()[-FLAGS.num_top_predictions:][::-1]
     for node_id in top_k:

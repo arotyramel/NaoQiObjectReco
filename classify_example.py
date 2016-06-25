@@ -7,6 +7,8 @@ import tensorflow as tf
 #FLAGS = tf.app.flags.FLAGS
 
 if __name__ == '__main__':
+  print("all labels:", classifier.all_labels())
+
   example_image_path = tf.app.flags.FLAGS.model_dir
   print("example_image_path:", example_image_path)
   image = os.path.join(example_image_path, 'cropped_panda.jpg')
