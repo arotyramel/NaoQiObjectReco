@@ -1,0 +1,5 @@
+topic: ~label()
+language: enu
+
+u:(what ["is that" "s that" "is this"]) %trigger ["ok let's take at look at it" "hmm that looks like" "let me think" "let me take a look"] $takeImage=1
+u:(e:FrontTactilTouched $FrontTactilTouched==1) ^goto(trigger)
