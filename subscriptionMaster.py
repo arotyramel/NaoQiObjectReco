@@ -2,12 +2,8 @@
 
 
 ########################################################################### 
-# This software is graciously provided by HumaRobotics 
+# This software is graciously provided by GenerationRobots 
 # under the Simplified BSD License on
-# github: git@www.humarobotics.com:baxter_tasker
-# HumaRobotics is a trademark of Generation Robots.
-# www.humarobotics.com 
-
 # Copyright (c) 2015, Generation Robots.
 # All rights reserved.
 # www.generationrobots.com
@@ -69,22 +65,3 @@ class SubscriptionMaster(object):
         self.subscriber[id].signal.disconnect(id)
         print "unsubscribed"
         
-class CustomClass():
-    def __init__(self):
-        
-        self.sm = SubscriptionMaster("localhost",9559)
-        self.id = self.sm.subscribe("myEvent", self.callback)
-        self.id2 = self.sm.subscribe("myEvent2", self.callback)
-        
-    def callback(self,value):
-        print"outer callback", value
-            
-    def unsubscribe(self):
-        self.sm.unsubscribe(self.id)
-        self.sm.unsubscribe(self.id2)
-if __name__ == "__main__":
-    c = CustomClass()
-    time.sleep(5)
-    c.unsubscribe()
-    while True:
-        time.sleep(1)
